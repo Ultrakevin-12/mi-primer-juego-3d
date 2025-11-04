@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://o4ofm0mjclc8"]
+[gd_scene load_steps=7 format=3 uid="uid://o4ofm0mjclc8"]
 
 [ext_resource type="PackedScene" uid="uid://drm5ige44fqqt" path="res://scenes/player.tscn" id="1_o5qli"]
 
@@ -8,7 +8,21 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_mr7gh"]
 size = Vector3(60, 2, 60)
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
+albedo_color = Color(0.9165579, 0.37056, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o5qli"]
+material = SubResource("StandardMaterial3D_o5qli")
+
+[sub_resource type="Curve3D" id="Curve3D_o5qli"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -13.031941, 0, -12.469656, 0, 0, 0, 0, 0, 0, -13.148709, 0, 15.438379, 0, 0, 0, 0, 0, 0, 13.474856, 0, -13.870897, 0, 0, 0, 0, 0, 0, 13.241313, 0, 15.905458),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 14.423137, 0)
@@ -31,3 +45,27 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 projection = 1
 size = 19.0
+
+[node name="Cylinders" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.377, 1, 15.811)
+mesh = SubResource("CylinderMesh_o5qli")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.246, 1, 15.621)
+mesh = SubResource("CylinderMesh_o5qli")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.508, 1, -13.758)
+mesh = SubResource("CylinderMesh_o5qli")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.984, 1, -12.516)
+mesh = SubResource("CylinderMesh_o5qli")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_o5qli")
